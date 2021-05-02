@@ -1,0 +1,2 @@
+# index
+selfdestruction by learning.
