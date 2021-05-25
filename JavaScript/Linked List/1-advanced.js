@@ -12,6 +12,7 @@ class LinkedList {
   constructor() {
     this.head = null;
     this.last = null;
+    this.size = 0;
   }
 
   getFirst() {
@@ -22,16 +23,22 @@ class LinkedList {
     return this.last;
   }
 
+  getSize() {
+    return this.size;
+  }
+
   push(data) {
     const node = new Node(data);
     if (this.head === null) {
       this.head = node;
       this.last = node;
+      this.size += 1;
       return node;
     }
     node.prev = this.last;
     this.last.next = node;
     this.last = node;
+    this.size += 1;
     return node;
   }
 
@@ -45,6 +52,7 @@ class LinkedList {
     node.prev = prevNode;
     prevNode.next = node;
     nextNode.prev = node;
+    this.size += 1;
     return node;
   }
 
@@ -58,6 +66,7 @@ class LinkedList {
     node.prev = prevNode;
     prevNode.next = node;
     nextNode.prev = node;
+    this.size += 1;
     return node;
   }
 
@@ -66,6 +75,7 @@ class LinkedList {
     if (!this.last.prev) {
       this.head = null;
       this.last = null;
+      this.size += -1;
       return this;
     }
     let tempLast = this.last;
@@ -73,6 +83,7 @@ class LinkedList {
     prev.next = null;
     this.last = prev;
     tempLast = null;
+    this.size += -1;
     return this;
   }
 
@@ -81,6 +92,7 @@ class LinkedList {
     if (!this.head.next) {
       this.head = null;
       this.last = null;
+      this.size += -1;
       return this;
     }
     let tempHead = this.head;
@@ -88,6 +100,7 @@ class LinkedList {
     next.prev = null;
     this.head = next;
     tempHead = null;
+    this.size += -1;
     return this;
   }
 }
