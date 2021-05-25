@@ -48,7 +48,18 @@ class LinkedList {
     return node;
   }
 
-  pushBefore(node, data) {}
+  pushBefore(data, nextNode) {
+    if (!nextNode) {
+      return this.push(data);
+    }
+    const node = new Node(data);
+    let prevNode = nextNode.prev;
+    node.next = nextNode;
+    node.prev = prevNode;
+    prevNode.next = node;
+    nextNode.prev = node;
+    return node;
+  }
 
   pop() {
     if (!this.last) return this;
@@ -91,12 +102,16 @@ const node4 = list.push(40);
 const node5 = list.push(50);
 
 // poping node
-list.pop();
+// list.pop();
 
 // adding node after existing node
 const node3 = list.pushAfter(30, node2);
 
 // shifting node
-list.shift();
+// list.shift();
+
+// adding node before existing node
+const node7 = list.pushBefore(70, null); // === list.pushAfter(70);
+const node6 = list.pushBefore(60, node7);
 
 console.dir({ list }, { depth: null });
