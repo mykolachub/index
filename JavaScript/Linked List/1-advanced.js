@@ -103,6 +103,32 @@ class LinkedList {
     this.size += -1;
     return this;
   }
+
+  traversal(fn) {
+    const type = typeof fn;
+    if (!fn || type !== 'function') throw new Error('Function was expected!');
+    let tempNode = this.head;
+    while (tempNode) {
+      fn(tempNode);
+      tempNode = tempNode.next;
+    }
+    return this;
+  }
+
+  log() {
+    return this.traversal(node => console.log(node.data));
+  }
+
+  logAll() {
+    return this.traversal(console.log);
+  }
+
+  delete() {
+    this.head = null;
+    this.last = null;
+    this.size = 0;
+    return this;
+  }
 }
 
 // usage
@@ -127,4 +153,9 @@ const node3 = list.pushAfter(30, node2);
 const node7 = list.pushBefore(70, null); // === list.pushAfter(70);
 const node6 = list.pushBefore(60, node7);
 
-console.dir({ list }, { depth: null });
+list.log(); // 10 20 30 40 50 60 70
+list.delete();
+
+list.log(); // nothing
+
+// console.dir({ list }, { depth: null });
